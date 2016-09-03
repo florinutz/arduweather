@@ -2,3 +2,4 @@ gmail_user:
 gmail_pass:
 receiver_email:
 serial_port: /dev/cu.usbmodem1411
+weather_api_token:

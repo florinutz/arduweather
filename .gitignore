@@ -89,3 +89,7 @@ ENV/
 .ropeproject
 
 .idea
+*.db
+vendor
+composer.lock
+composer.phar
