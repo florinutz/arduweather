@@ -2,7 +2,7 @@
 namespace Flo;
 
 use Cmfcmf\OpenWeatherMap;
-use \Doctrine\DBAL\Connection as DBALConnection;
+use Doctrine\DBAL\Connection as DBALConnection;
 
 class RecommenderService
 {
@@ -32,7 +32,13 @@ class RecommenderService
      */
     public function shouldWaterThePlants()
     {
-        return (bool) mt_rand(0, 1);
+        $currentGroundHumidity = $this->getLastGroundHumidity();
+
+        if ($currentGroundHumidity['val'] < 300) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
