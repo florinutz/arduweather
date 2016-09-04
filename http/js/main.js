@@ -8,10 +8,11 @@ $(function() {
                 $('#tat-top > span').html(data.today_average_temperature);
                 $('#yagh-top > span').html(data.yesterday_average_ground_humidity);
                 $('#yat-top > span').html(data.yesterday_average_temperature);
+                $('#wd-top > span').html(data.weather_description);
                 if (data.advice) {
                     $('#advice').html('Please water plants.');
                 } else {
-                    $('#advice').html('Not watering needed.');
+                    $('#advice').html('No watering needed.');
                 }
             }
         });
