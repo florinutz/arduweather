@@ -9,11 +9,17 @@ $(function() {
                 $('#yagh-top > span').html(data.yesterday_average_ground_humidity);
                 $('#yat-top > span').html(data.yesterday_average_temperature);
                 $('#wd-top > span').html(data.weather_description);
+
                 if (data.advice) {
                     $('#advice').html('Please water plants.');
                 } else {
                     $('#advice').html('No watering needed.');
                 }
+
+                $('#last-light > div').html(data.last_light.val);
+                $('#last-ground-humidity > div').html(data.last_ground_humidity.val);
+                $('#last-air-humidity > div').html(data.last_air_humidity.val);
+                $('#last-temperature > div > span').html(data.last_temperature.val);
             }
         });
     }, $('body').data('refresh'));
