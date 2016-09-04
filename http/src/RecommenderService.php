@@ -23,12 +23,12 @@ class RecommenderService
      */
     public function __construct(DBALConnection $db, OpenWeatherMap $owm)
     {
-        $this->db = $db;
+        $this->db  = $db;
         $this->owm = $owm;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function shouldWaterThePlants()
     {
@@ -39,6 +39,31 @@ class RecommenderService
         }
 
         return false;
+    }
+
+    /**
+     * @return string
+     */
+    public function getWeatherDescription()
+    {
+        /** @var OpenWeatherMap\CurrentWeather $weatherDescription */
+        $weatherDescription = $this->owm->getWeather('Berlin');
+
+        return $weatherDescription->weather->description;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isRaining()
+    {
+        $isRaining = strpos($this->getWeatherDescription(), 'rain');
+
+        if ($isRaining === false) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -73,6 +98,7 @@ class RecommenderService
         if (!isset($this->fetchLatestAverages()[1])) {
             return false;
         }
+
         return $this->fetchLatestAverages()[1]['average_humidity_ground'];
     }
 
@@ -84,6 +110,7 @@ class RecommenderService
         if (!isset($this->fetchLatestAverages()[1])) {
             return false;
         }
+
         return $this->fetchLatestAverages()[1]['average_temperature'];
     }
 
@@ -125,18 +152,19 @@ class RecommenderService
     public function toArray()
     {
         return [
-            'count' => (int) $this->getCount(),
-            'advice' => $this->shouldWaterThePlants(),
+            'count'               => (int) $this->getCount(),
+            'advice'              => $this->shouldWaterThePlants(),
+            'weather_description' => $this->getWeatherDescription(),
 
-            'today_average_ground_humidity' => round($this->getTodayAverageGroundHumidity()),
-            'today_average_temperature' => round($this->getTodayAverageTemperature()),
+            'today_average_ground_humidity'     => round($this->getTodayAverageGroundHumidity()),
+            'today_average_temperature'         => round($this->getTodayAverageTemperature()),
             'yesterday_average_ground_humidity' => round($this->getYesterdayAverageGroundHumidity()),
-            'yesterday_average_temperature' => round($this->getYesterdayAverageTemperature()),
+            'yesterday_average_temperature'     => round($this->getYesterdayAverageTemperature()),
 
-            'last_light' => $this->getLastLight(),
+            'last_light'           => $this->getLastLight(),
             'last_ground_humidity' => $this->getLastGroundHumidity(),
-            'last_air_humidity' => $this->getLastAirHumidity(),
-            'last_temperature' => $this->getLastTemperature()
+            'last_air_humidity'    => $this->getLastAirHumidity(),
+            'last_temperature'     => $this->getLastTemperature()
         ];
     }
 
@@ -165,5 +193,4 @@ class RecommenderService
             GROUP BY DATE( s.created_at );
         ");
     }
-
 }
