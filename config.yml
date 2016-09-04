@@ -1,0 +1,5 @@
+gmail_user: florinutz
+gmail_pass: aaaaaa
+receiver_email: florinutz@gmail.com
+serial_port: /dev/cu.usbmodem1421
+weather_api_token: ef454a28ff4d065f674c69422054799a
