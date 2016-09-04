@@ -6,29 +6,28 @@
             <div class="uk-width-medium-1-4">
                 <div class="uk-panel uk-panel-box uk-panel-hover" id="last-light">
                     <h3 class="uk-panel-title"><i class="uk-icon-eye"></i> Light</h3>
-                    <div>{{ app.recommender.toArray.last_light.val }}</div>
+                    <div class="uk-text-large uk-text-primary">{{ app.recommender.toArray.last_light.val }}</div>
                 </div>
             </div>
             <div class="uk-width-medium-1-4">
                 <div class="uk-panel uk-panel-box uk-panel-hover" id="last-ground-humidity">
                     <h3 class="uk-panel-title"><i class="uk-icon-umbrella"></i> Ground Humidity</h3>
-                    <div>{{ app.recommender.toArray.last_ground_humidity.val }}</div>
+                    <div class="uk-text-large uk-text-primary">{{ app.recommender.toArray.last_ground_humidity.val }}</div>
                 </div>
             </div>
             <div class="uk-width-medium-1-4">
                 <div class="uk-panel uk-panel-box uk-panel-hover" id="last-air-humidity">
                     <h3 class="uk-panel-title"><i class="uk-icon-cloud"></i> Air Humidity</h3>
-                    <div>{{ app.recommender.toArray.last_air_humidity.val }}</div>
+                    <div class="uk-text-large uk-text-primary">{{ app.recommender.toArray.last_air_humidity.val }}</div>
                 </div>
             </div>
             <div class="uk-width-medium-1-4">
                 <div class="uk-panel uk-panel-box uk-panel-hover" id="last-temperature">
                     <h3 class="uk-panel-title"><i class="uk-icon-lightbulb-o"></i> Temperature (C)</h3>
-                    <div><span>{{ app.recommender.toArray.last_temperature.val }}</span> °C</div>
+                    <div class="uk-text-large uk-text-primary"><span>{{ app.recommender.toArray.last_temperature.val }}</span> °C</div>
                 </div>
             </div>
+            <div id="advice" class="uk-align-center uk-margin-large-top uk-text-primary uk-text-large"></div>
         </div>
-        <br>
-        <span id="advice"></span>
     </article>
 {% endblock %}

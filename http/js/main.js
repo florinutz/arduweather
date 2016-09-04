@@ -10,16 +10,16 @@ $(function() {
                 $('#yat-top > span').html(data.yesterday_average_temperature);
                 $('#wd-top > span').html(data.weather_description);
 
-                if (data.advice) {
-                    $('#advice').html('Please water plants.');
-                } else {
-                    $('#advice').html('No watering needed.');
-                }
-
                 $('#last-light > div').html(data.last_light.val);
                 $('#last-ground-humidity > div').html(data.last_ground_humidity.val);
                 $('#last-air-humidity > div').html(data.last_air_humidity.val);
                 $('#last-temperature > div > span').html(data.last_temperature.val);
+
+                if (data.advice) {
+                    $('#advice').html('Please water the plant!');
+                } else {
+                    $('#advice').html('Not watering needed, all good, phew!');
+                }
             }
         });
     }, $('body').data('refresh'));
