@@ -31,6 +31,7 @@ class RecommenderService
      */
     public function shouldWaterThePlants()
     {
+        return (bool) mt_rand(0, 1);
     }
 
     /**
@@ -118,6 +119,7 @@ class RecommenderService
     {
         return [
             'count' => (int) $this->getCount(),
+            'advice' => $this->shouldWaterThePlants(),
             'today_average_ground_humidity' => round($this->getTodayAverageGroundHumidity()),
             'today_average_temperature' => round($this->getTodayAverageTemperature()),
             'yesterday_average_ground_humidity' => round($this->getYesterdayAverageGroundHumidity()),
