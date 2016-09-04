@@ -25,8 +25,11 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 ));
 
 $app['recommender'] = function($app) {
-    return new \Flo\RecommenderService($app['db']);
+    $owm = new \Cmfcmf\OpenWeatherMap('ef454a28ff4d065f674c69422054799a');
+    return new \Flo\RecommenderService($app['db'], $owm);
 };
+
+$app['debug'] = true;
 
 $app->get('/', function() use($app) {
     /** @var \Symfony\Bridge\Twig\TwigEngine $twig */
@@ -34,6 +37,11 @@ $app->get('/', function() use($app) {
     return $twig->render('index.twig');
 });
 
-$app['debug'] = true;
+$app->get('refresh', function() use($app) {
+    /** @var \Flo\RecommenderService $recommender */
+    $recommender = $app['recommender'];
+    $result = $recommender->toArray();
+    return json_encode($result);
+});
 
 $app->run();
