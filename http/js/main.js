@@ -18,7 +18,7 @@ $(function() {
                 if (data.advice) {
                     $('#advice').html('Please water the plant!');
                 } else {
-                    $('#advice').html('Not watering needed, all good, phew!');
+                    $('#advice').html('No watering needed, all good, phew!');
                 }
             }
         });
