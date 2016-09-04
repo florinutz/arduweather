@@ -19,6 +19,7 @@ class RecommenderService
 
     /**
      * @param DBALConnection $db
+     * @param OpenWeatherMap $owm
      */
     public function __construct(DBALConnection $db, OpenWeatherMap $owm)
     {
@@ -81,35 +82,35 @@ class RecommenderService
     }
 
     /**
-     * @return int
+     * @return array
      */
-    public function getCurrentLight()
+    public function getLastLight()
     {
-        return (int) $this->db->fetchAssoc("SELECT light as val FROM sensor order by created_at desc limit 1")['c'];
+        return $this->db->fetchAssoc("SELECT light as val, created_at FROM sensor order by created_at desc limit 1");
     }
 
     /**
-     * @return int
+     * @return array
      */
-    public function getCurrentGroundHumidity()
+    public function getLastGroundHumidity()
     {
-        return (int) $this->db->fetchAssoc("SELECT humidity_ground as val FROM sensor order by created_at desc limit 1")['c'];
+        return $this->db->fetchAssoc("SELECT humidity_ground as val, created_at FROM sensor order by created_at desc limit 1");
     }
 
     /**
-     * @return int
+     * @return array
      */
-    public function getCurrentAirHumidity()
+    public function getLastAirHumidity()
     {
-        return (int) $this->db->fetchAssoc("SELECT humidity_air as val FROM sensor order by created_at desc limit 1")['c'];
+        return $this->db->fetchAssoc("SELECT humidity_air as val, created_at FROM sensor order by created_at desc limit 1");
     }
 
     /**
-     * @return int
+     * @return array
      */
-    public function getCurrentTemperature()
+    public function getLastTemperature()
     {
-        return (int) $this->db->fetchAssoc("SELECT temperature as val FROM sensor order by created_at desc limit 1")['c'];
+        return $this->db->fetchAssoc("SELECT temperature as val, created_at FROM sensor order by created_at desc limit 1");
     }
 
     /**
@@ -120,10 +121,16 @@ class RecommenderService
         return [
             'count' => (int) $this->getCount(),
             'advice' => $this->shouldWaterThePlants(),
+
             'today_average_ground_humidity' => round($this->getTodayAverageGroundHumidity()),
             'today_average_temperature' => round($this->getTodayAverageTemperature()),
             'yesterday_average_ground_humidity' => round($this->getYesterdayAverageGroundHumidity()),
-            'yesterday_average_temperature' => round($this->getYesterdayAverageTemperature())
+            'yesterday_average_temperature' => round($this->getYesterdayAverageTemperature()),
+
+            'last_light' => $this->getLastLight(),
+            'last_ground_humidity' => $this->getLastGroundHumidity(),
+            'last_air_humidity' => $this->getLastAirHumidity(),
+            'last_temperature' => $this->getLastTemperature()
         ];
     }
 
