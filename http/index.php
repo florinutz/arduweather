@@ -25,7 +25,8 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 ));
 
 $app['recommender'] = function($app) {
-    return new \Flo\RecommenderService($app['db']);
+    $owm = new \Cmfcmf\OpenWeatherMap('ef454a28ff4d065f674c69422054799a');
+    return new \Flo\RecommenderService($app['db'], $owm);
 };
 
 $app['debug'] = true;

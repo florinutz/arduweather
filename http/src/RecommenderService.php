@@ -1,6 +1,7 @@
 <?php
 namespace Flo;
 
+use Cmfcmf\OpenWeatherMap;
 use \Doctrine\DBAL\Connection as DBALConnection;
 
 class RecommenderService
@@ -12,11 +13,24 @@ class RecommenderService
     protected $latestAverages;
 
     /**
+     * @var OpenWeatherMap
+     */
+    protected $owm;
+
+    /**
      * @param DBALConnection $db
      */
-    public function __construct(DBALConnection $db)
+    public function __construct(DBALConnection $db, OpenWeatherMap $owm)
     {
         $this->db = $db;
+        $this->owm = $owm;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function shouldWaterThePlants()
+    {
     }
 
     /**

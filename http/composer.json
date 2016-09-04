@@ -1,9 +1,10 @@
 {
   "require": {
     "doctrine/dbal": "*",
-    "silex/silex": "~2.0",
+    "silex/silex": "*",
     "twig/twig": "*",
-    "symfony/twig-bridge": "*"
+    "symfony/twig-bridge": "*",
+    "cmfcmf/openweathermap-php-api": "*"
   },
   "autoload": {
     "psr-4": {
