@@ -28,12 +28,19 @@ $app['recommender'] = function($app) {
     return new \Flo\RecommenderService($app['db']);
 };
 
+$app['debug'] = true;
+
 $app->get('/', function() use($app) {
     /** @var \Symfony\Bridge\Twig\TwigEngine $twig */
     $twig = $app['twig'];
     return $twig->render('index.twig');
 });
 
-$app['debug'] = true;
+$app->get('refresh', function() use($app) {
+    /** @var \Flo\RecommenderService $recommender */
+    $recommender = $app['recommender'];
+    $result = $recommender->toArray();
+    return json_encode($result);
+});
 
 $app->run();
