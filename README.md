@@ -5,6 +5,6 @@ Processes data from arduino sensors, combines it with weather data from the web 
 ` pip install pyowm pyserial `
 
 ```
-cd httpd
+cd http
 php -S localhost:8080 -ddate.timezone=Europe/Berlin
 ```
